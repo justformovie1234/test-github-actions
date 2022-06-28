@@ -29,5 +29,5 @@ jobs:
         cat >> commit_msg.txt << EOF
         ${{ github.event.head_commit.message }}
         EOF
-        git commit -F commit_msg.txt -m 'Please see https://github.com/gp201/test-github-actions/commits/test-wiki-push/wiki for commit history.'
+        git commit -F commit_msg.txt
         git push --force
