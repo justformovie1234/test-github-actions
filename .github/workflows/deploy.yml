@@ -27,9 +27,7 @@ jobs:
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
         git add .
         cat >> commit_msg.txt << EOF
-        ${{ github.event.head_commit.message }}
-        
-        
+        ${{ github.event.head_commit.message }} \n
         Please see https://github.com/gp201/test-github-actions/commits/test-wiki-push/wiki for commit history.
         EOF
         git commit -F commit_msg.txt
