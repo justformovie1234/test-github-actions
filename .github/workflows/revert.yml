@@ -13,5 +13,5 @@ jobs:
         run: |
           git clone https://github.com/gp201/test-github-actions.wiki.git ${{ env.TEMP_WIKI_FOLDER }}
           cd ${{ env.TEMP_WIKI_FOLDER }}
-          git reset --hard backup
+          git reset --hard origin/backup
           git push -f origin master
