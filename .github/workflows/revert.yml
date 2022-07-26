@@ -12,12 +12,9 @@ jobs:
           TEMP_WIKI_FOLDER: temp_wiki
         run: |
           git clone https://github.com/gp201/test-github-actions.wiki.git ${{ env.TEMP_WIKI_FOLDER }}
-          rsync -av --delete wiki/ ${{ env.TEMP_WIKI_FOLDER }}/ --exclude .git
           cd ${{ env.TEMP_WIKI_FOLDER }}
-          echo "$GITHUB_CONTEXT"
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name '${{ github.event.head_commit.author.username }}'
+          git config --global user.email '${{ github.event.head_commit.author.username }}@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
-          git add .
-          git commit -am "Revert Wiki Changes Made Through the Web Interface"
-          git push --force
+          git reset --hard origin/backup
+          git push -f origin master
